@@ -1,4 +1,6 @@
-pip3 install django #django kurulumu
+## KILAVUZ
+
+pip3 install django #django'nun pipden edinilmesi
 
 pip3 install virtualenv #virtual enviroment kurulumu
 
