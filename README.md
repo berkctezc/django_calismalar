@@ -20,10 +20,10 @@
          source env/bin/activate 
          # environment'ı aktif hale getirmek (win)
          env\bin\activate
-         # deaktif etmek istersek -> deactivate
-   ```
+         # deaktif etmek istersek -> deactivate 
+         ```
          
-      artık kod satırımızın başına virtual env'imizin adı geldi
+         ​	artık kod satırımızın başına virtual env'imizin adı geldi
    
 3. ### Django'yu kurmak ve proje dosyalarını oluşturmak
    
@@ -38,7 +38,7 @@
       - Oluşan proje dosyalarını inceleyelim
       
         - init.py -> projenin python paketi olarak görülmesini sağlar
-        - settings.py ->proje ayarları (paketler,templateler, database vb.)
+        - settings.py -> proje ayarları (paketler,templateler, database vb.)
         - urls.py -> adresleme (routing)
         - wsgi.py -> djangonun sunucuyla iletişimini sağlayan dosya
         - manage.py -> python scriptlerini çalıştırmak için
@@ -53,14 +53,90 @@
 5. ### Gerekli Dizinlerin oluşturulması
    
       1. Statik dosyaları tutacağımız static klasörümüzü oluşturalım. Bu dizine örnek çalışmalarımız için hazır bir tema (cleanblog) yükleyeceğiz.
-   
+      
          ```bash
          mkdir static
          ```
-   
+      
       2. Template klasörünü oluşturalım. Bu dizine temadaki html dosyaları gelecek
-   
+      
          ```bash
          mkdir templates
          ```
+         
+         (settings.py dosyasına gerekli eklemeler yapılır)
+         
+         ```python
+         # Application definition
+         #.....
+         TEMPLATES = [
+             {
+         #.....:.....
+                 'DIRS': [os.path.join(BASE_DIR,'templates')],  #template directory adreslemesi
+             }
+          
+         ]
+         
+         #..
+         
+         # Static files (CSS, JavaScript, Images)
+         #...........
+         STATICFILES_DIRS = [os.path.join(BASE_DIR,'static')] #statik dosyaların directorysini belirttik
+         ```
+         
+         
+      
+5. ### Uygulama oluşturmak
 
+      1. ```bash
+            #blog ismine sahip
+            python manage.py startapp blog
+            #blog isimli dizin dosyalarıyla birlikte oluştu
+            ```
+
+      2. Oluşturduğumuz uygulamayı ana projede kullanacağımızı belirtmek için settings.py'yi düzenleyelim
+
+            1. ```python
+                  # Application definition
+                  
+                  INSTALLED_APPS = [
+                      'blog.apps.BlogConfig', #olusturulan uygulama
+                      #....
+                  ]
+                  ```
+
+      3. Oluşturduğumuz uygulamada sınıf tabanlı bir view oluşturacağız (views.py)
+
+            1. ```python
+                  class HomePageView(TemplateView):
+                  	template_name = 'index.html'
+                  ```
+
+            2. Ana projedeki urls.py dosyamızda sitemizde hangi directorylerin nereyi göstereceğine belirteceğiz. root dizine belirtme yapalım
+
+                  1. ```python
+                        #....
+                        from django.urls import path,include
+                        
+                        urlpatterns = [
+                            path('admin/', admin.site.urls),
+                            path('', include('blog.urls') ),
+                        ]
+                        ```
+
+            3. Bir urls.py dosyası da oluşturduğumuz uygulama yaratalım ve içerisine
+
+                  1. ```python
+                        from django.urls import path
+                        from blog.views import HomePageView
+                        
+                        urlpatterns = [
+                            #path('directory', CagirilacakView)
+                            path('', HomePageView.as_view(), name='index'),
+                        
+                        ]
+                        ```
+
+                        
+
+            
