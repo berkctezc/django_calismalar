@@ -43,14 +43,14 @@
         - wsgi.py -> djangonun sunucuyla iletişimini sağlayan dosya
         - manage.py -> python scriptlerini çalıştırmak için
       
-   4. ### Server'ın ayağa kaldırılması
+4. ### Server'ın ayağa kaldırılması
    
       1. ```bash
          #serverı ayağa kaldırma (127.0.0.1:8000)
          python manage.py runserver 
          ```
    
-   5. ### Dizinlerin oluşturulması
+5. ### Gerekli Dizinlerin oluşturulması
    
       1. Statik dosyaları tutacağımız static klasörümüzü oluşturalım. Bu dizine örnek çalışmalarımız için hazır bir tema (cleanblog) yükleyeceğiz.
    
