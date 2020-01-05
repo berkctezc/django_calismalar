@@ -17,8 +17,11 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path,include
+from django.views.generic import TemplateView #template yapisini kullanmak icin
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('blog.urls') ), #blog uygulamamızdaki urls dosyasina bakilacak
+    path('about/',TemplateView.as_view(template_name = 'about.html')),
+    path('contact/',TemplateView.as_view(template_name = 'contact.html')),
 ]
