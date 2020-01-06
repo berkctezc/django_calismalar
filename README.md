@@ -139,4 +139,40 @@
 
                         
 
+6. ### Statik dosyaları bağlamak
+
+      1. html dosyalarinin başına statik kullanmak istediğimiz dosyalar varsa ekliyoruz
+
+            ```python
+            {% load static %}
+            ```
+
+      2. statik olarak alınan js,css,image vb her şey bu syntaxla alınır
+
+            ```python
+            <!- normal html hali ->
+            href="css/clean-blog.min.css" 
             
+            <!- django hali ->
+            ... href="{% static 'css/clean-blog.min.css' %}" ... 
+            ```
+
+            
+
+7. #### APP migrationlar ve Admin ayarlanması
+
+      1. settings.py içerisindeki INSTALLED_APPS array içeriğindeki modullerin projeye entegre edilmesi
+
+            ```bash
+            python manage.py migrate
+            ```
+
+      2. Superuser yaratmak
+
+            ```shell
+            python manage.py createsuperuser
+            ```
+
+            gerekli bilgiler girilir ve artık admin arayüzüne http://localhost:8000/admin adresinden yarattığınız kullanıcı ile erişebilirsiniz.
+
+      3. 
