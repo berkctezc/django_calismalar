@@ -164,15 +164,27 @@
       1. settings.py içerisindeki INSTALLED_APPS array içeriğindeki modullerin projeye entegre edilmesi
 
             ```bash
+            python manage.py makemigrations
             python manage.py migrate
-            ```
-
-      2. Superuser yaratmak
-
+      ```
+      
+2. Superuser yaratmak
+      
             ```shell
             python manage.py createsuperuser
+      ```
+      
+      gerekli bilgiler girilir ve artık admin arayüzüne http://localhost:8000/admin adresinden yarattığınız kullanıcı ile erişebilirsiniz.
+      
+8. #### Model Yapısı ve ORM  Kavramı
+
+      1. blog app içinde models.py içinde database için modelleri oluşturacağız. referans olarak https://docs.djangoproject.com/en/3.0/ref/models/fields/ alabilirsiniz. 
+
+      2. Model oluşturmamız bittikten sonra makemigrations yapıyoruz ve pycache'de oluşan sql modelini görebiliyoruz. SQL query olarak görmek istersek
+
+            ```
+            python manage.py sqlmigrate blog 0001
+                                      --hangi app icinde ise ve model numarası--
             ```
 
-            gerekli bilgiler girilir ve artık admin arayüzüne http://localhost:8000/admin adresinden yarattığınız kullanıcı ile erişebilirsiniz.
-
-      3. 
+      3. simdi ise admin'e entegre edeceğiz. blog app içinde admin.py'a model'i kaydedeceğiz. artık admin panelinde de modelimizi görebiliriz

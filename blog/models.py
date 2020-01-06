@@ -1,3 +1,18 @@
 from django.db import models
 
-# Create your models here.
+# modellerimizi buradan yaratiyoruz
+# blog yazilarimiz icin model olusturalim
+
+
+class Post(models.Model):
+    # basligi 100 karakterle sınırladık
+    title = models.CharField(max_length=100)
+    # alt metini 100 karakterle sınırladık
+    subtitle = models.CharField(max_length=100)
+    content = models.TextField()  # iceriklerimiz yazi alanı kullanacak
+    author = models.ForeignKey(  # coktan tekile ilişki ( bir kullanıcı bir çok içerik üretebilir)
+        'auth.User',  # django tarafından oluşturulmuş kullanıcı bilgisi
+        on_delete=models.CASCADE,  # olusturan kullanıcı silme islemi gerceklestirebilir
+    )
+    date = models.DateTimeField(auto_now_add=True  # postun olusturuldugu tarih eklemesi
+                                )
