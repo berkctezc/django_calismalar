@@ -16,3 +16,6 @@ class Post(models.Model):
     )
     date = models.DateTimeField(auto_now_add=True  # postun olusturuldugu tarih eklemesi
                                 )
+
+    def __str__(self):
+        return self.title

@@ -166,15 +166,22 @@
             ```bash
             python manage.py makemigrations
             python manage.py migrate
-      ```
+            ```
       
 2. Superuser yaratmak
+   
+        ```bash
+        python manage.py createsuperuser
+      ```
+      gerekli bilgiler girilir ve artık admin arayüzüne http://localhost:8000/admin adresinden yarattığınız kullanıcı ile erişebilirsiniz.
       
-            ```shell
-            python manage.py createsuperuser
+      şifreyi unutursanız:
+      
+      ```
+      python manage.py changepassword kullanici_ismi
       ```
       
-      gerekli bilgiler girilir ve artık admin arayüzüne http://localhost:8000/admin adresinden yarattığınız kullanıcı ile erişebilirsiniz.
+      
       
 8. #### Model Yapısı ve ORM  Kavramı
 
@@ -184,7 +191,42 @@
 
             ```
             python manage.py sqlmigrate blog 0001
-                                      --hangi app icinde ise ve model numarası--
+            --hangi app icinde ise ve model numarası--
             ```
 
       3. simdi ise admin'e entegre edeceğiz. blog app içinde admin.py'a model'i kaydedeceğiz. artık admin panelinde de modelimizi görebiliriz
+      
+10. #### Admin Paneli ile içerik oluşturup siteye entegre etmek
+
+      1. Oluşturduğumuz modele girelim ve yeni bir kaç model nesnesi oluşturalım (bizim örneğimiz için post). Model yapımızdan kaynaklı olarak oluşan objelerin ismi Post object (1) ve Post object (2) biçiminde olacaktır. Bunun önüne geçmek için model dosyamızda model yapımızın içine
+
+            ```python
+            def __str__(self):
+                return self.title
+            ```
+
+            ekliyoruz. ve sonuç olarak kendi koyduğumuz isimlerle görünmeye başlıyorlar.
+
+      2. Şimdi oluşturulan içerikleri dinamik olarak sitede gösterebilmek için views'e TemplateView yerine ListView yapısını ve buna ek olarak oluşturduğumuz model yapısını import ediyoruz
+
+            1. ```python
+                  .....
+                  from django.views.generic import ListView
+                  from .models import Post
+                  
+                  class BlogPageView(ListView):
+                      model = Post
+                      template_name = 'index.html'
+                  ```
+
+            2. urls.py içinde yapılacak değişikliler:
+
+                  1. ```python
+                        ...
+                        from .views import BlogPageView
+                        
+                        urlpatterns = [ path('', BlogPageView.as_view(), name='index'),]
+                        ```
+
+            3. sonrasında statik html dosyalarına gerekli değişiklikleri yapacağız
+
