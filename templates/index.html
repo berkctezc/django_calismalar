@@ -10,8 +10,8 @@
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="site-heading">
-            <h1>Clean Blog</h1>
-            <span class="subheading">A Blog Theme by Start Bootstrap</span>
+            <h1>Django Blog</h1>
+            <span class="subheading">Bir Django Öğrenme Projesi</span>
           </div>
         </div>
       </div>
@@ -22,11 +22,9 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
-
       {% for post in object_list %}
-
         <div class="post-preview">
-          <a href="post.html">
+          <a href="{% url 'post' post.pk %}">
             <h2 class="post-title">
               {{ post.title }}
             </h2>
@@ -36,7 +34,9 @@
           </a>
           <p class="post-meta">Posted by
             <a href="#">{{ post.author }}</a>
-            on {{post.date}}</p>
+            on {{ post.date|date:"F d, Y" }}
+            <!--https://docs.djangoproject.com/en/3.0/ref/templates/builtins/#date-->
+            </p>
         </div>
         <hr>
 

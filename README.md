@@ -143,13 +143,13 @@
 
       1. html dosyalarinin başına statik kullanmak istediğimiz dosyalar varsa ekliyoruz
 
-            ```python
+            ```django
             {% load static %}
             ```
 
       2. statik olarak alınan js,css,image vb her şey bu syntaxla alınır
 
-            ```python
+            ```html
             <!- normal html hali ->
             href="css/clean-blog.min.css" 
             
@@ -167,21 +167,20 @@
             python manage.py makemigrations
             python manage.py migrate
             ```
+            
+      2. Superuser yaratmak
       
-2. Superuser yaratmak
-   
-        ```bash
-        python manage.py createsuperuser
-      ```
-      gerekli bilgiler girilir ve artık admin arayüzüne http://localhost:8000/admin adresinden yarattığınız kullanıcı ile erişebilirsiniz.
+            1. ```bash
+                  python manage.py createsuperuser
+                  ```
       
-      şifreyi unutursanız:
+                  gerekli bilgiler girilir ve artık admin arayüzüne http://localhost:8000/admin adresinden yarattığınız kullanıcı ile erişebilirsiniz.
       
-      ```
-      python manage.py changepassword kullanici_ismi
-      ```
+                  şifreyi unutursanız:
       
-      
+                  ```bash
+                  python manage.py changepassword kullanici_ismi
+                  ```
       
 8. #### Model Yapısı ve ORM  Kavramı
 
@@ -196,7 +195,7 @@
 
       3. simdi ise admin'e entegre edeceğiz. blog app içinde admin.py'a model'i kaydedeceğiz. artık admin panelinde de modelimizi görebiliriz
       
-10. #### Admin Paneli ile içerik oluşturup siteye entegre etmek
+9. #### Admin Paneli ile içerik oluşturup siteye entegre etmek
 
       1. Oluşturduğumuz modele girelim ve yeni bir kaç model nesnesi oluşturalım (bizim örneğimiz için post). Model yapımızdan kaynaklı olarak oluşan objelerin ismi Post object (1) ve Post object (2) biçiminde olacaktır. Bunun önüne geçmek için model dosyamızda model yapımızın içine
 
@@ -228,5 +227,29 @@
                         urlpatterns = [ path('', BlogPageView.as_view(), name='index'),]
                         ```
 
-            3. sonrasında statik html dosyalarına gerekli değişiklikleri yapacağız
+            3. sonrasında statik html dosyalarına gerekli değişiklikleri yapacağız.
 
+                  ```django
+                   {% for post in object_list %}
+                          <div>içerikler....</div>
+                        {% endfor %}
+                  ```
+
+10. #### Tekil İçerik Sayfaları
+
+      1. Views'e DetailView import edilir ve Detay sayfa yapısı class olarak oluşturulur:
+
+            1. ```python
+                  from django.views.generic import ..., DetailView
+                  ...
+                  
+                  class BlogDetailView(DetailView):
+                      model = Post
+                      template_name = 'post.html'
+                  ```
+
+            2. Post html sayfası uygun hale getirilir
+
+            3. urls dosyasına oluşturduğumuz class import edilir ve /post path'ine gerekli yönlendirme yapılır
+
+            4. 
