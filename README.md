@@ -7,7 +7,7 @@
       - [Kendi sisteminize uygun olacak şekilde resmi siteden yükleyebilirsiniz.](https://www.python.org/downloads/)
       - Yüklemeyi test etmek için terminalinize python | python3 komutunu çalıştırarak python shell'e girebildiğini kontrol edin.
 
-   2. ### Virtual Environment
+   2. ### Virtual Environment ( İsteğe Bağlı)
 
       - ```bash
          # virtual enviroment'ın pipden edinilmesi
@@ -74,11 +74,8 @@
          #.....:.....
                  'DIRS': [os.path.join(BASE_DIR,'templates')],  #template directory adreslemesi
              }
-          
          ]
-         
          #..
-         
          # Static files (CSS, JavaScript, Images)
          #...........
          STATICFILES_DIRS = [os.path.join(BASE_DIR,'static')] #statik dosyaların directorysini belirttik
@@ -251,3 +248,49 @@
             2. Post html sayfası uygun hale getirilir
 
             3. urls dosyasına oluşturduğumuz class import edilir ve /post path'ine gerekli yönlendirme yapılır
+    
+11. Medya İçerikleri
+
+       1. Blog uygulamasında halihazırda bulunan modelimize image field ekliyoruz
+
+              ```python
+             image = models.ImageField(upload_to='images/', null=True) 
+              ```
+
+             İmageField özelliğini kullanmak için Pillow paketini yüklememiz gerekiyor
+    
+               ```bash
+             pip3 install Pillow
+               ```
+
+             2. Ana projede settings.py'e directory belirtilmesi
+
+                   ```python
+                   MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+                   MEDIA_URL = '/media/'
+```
+                   
+             3. Migration yapılır
+             
+                   ```bash
+                   python manage.py makemigrations
+                   python manage.py makemigrations
+                   ```
+             
+             4. Admin Panelinden varolan bir posta image eklenir
+             
+             5. post.html dosyasında image url olarak {{post.image.url}} kullanılarak dilenen yerde kulanılabilir
+             
+             6. modele eklediğimiz image'i viewde gösterebilmek için urls.py'de gerekli düzenlemeler yapılacak
+             
+                   1. ```python
+                         from #....
+                         from django.conf import settings
+                         from django.conf.urls.static import static
+                         
+                         urlpatterns = [
+                         #.....  path('contact/',TemplateView.as_view(template_name = 'contact.html')),
+                         ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+                         ```
+             
+                         

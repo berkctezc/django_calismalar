@@ -14,8 +14,11 @@ class Post(models.Model):
         'auth.User',  # django tarafından oluşturulmuş kullanıcı bilgisi
         on_delete=models.CASCADE,  # olusturan kullanıcı silme islemi gerceklestirebilir
     )
-    date = models.DateTimeField(auto_now_add=True  # postun olusturuldugu tarih eklemesi
-                                )
+    # postun olusturuldugu tarih eklemesi
+    date = models.DateTimeField(auto_now_add=True)
+
+    # modele admin panelinden image ekleme secenegi ve default directory belirlemek
+    image = models.ImageField(upload_to='images/', null=True)
 
     def __str__(self):
         return self.title
