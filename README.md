@@ -251,5 +251,3 @@
             2. Post html sayfası uygun hale getirilir
 
             3. urls dosyasına oluşturduğumuz class import edilir ve /post path'ine gerekli yönlendirme yapılır
-
-            4. 
