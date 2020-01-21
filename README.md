@@ -249,7 +249,7 @@
 
             3. urls dosyasına oluşturduğumuz class import edilir ve /post path'ine gerekli yönlendirme yapılır
     
-11. Medya İçerikleri
+11. #### Medya İçerikleri
 
        1. Blog uygulamasında halihazırda bulunan modelimize image field ekliyoruz
 
@@ -263,23 +263,23 @@
              pip3 install Pillow
                ```
 
-             2. Ana projede settings.py'e directory belirtilmesi
+             2. Ana projede settings.py'e directory belirtilmesi.
 
                    ```python
                    MEDIA_ROOT = os.path.join(BASE_DIR,'media')
                    MEDIA_URL = '/media/'
-```
-                   
-             3. Migration yapılır
-             
-                   ```bash
-                   python manage.py makemigrations
-                   python manage.py makemigrations
                    ```
+                   
+             3. Migration yapılır.
              
-             4. Admin Panelinden varolan bir posta image eklenir
+                   1. ```bash
+                          python manage.py makemigrations
+                          python manage.py migrate
+                         ```
              
-             5. post.html dosyasında image url olarak {{post.image.url}} kullanılarak dilenen yerde kulanılabilir
+             4. Admin Panelinden varolan bir posta image eklenir.
+             
+             5. post.html dosyasında image url olarak {{post.image.url}} kullanılarak istenilen yerde kulanılabilir.
              
              6. modele eklediğimiz image'i viewde gösterebilmek için urls.py'de gerekli düzenlemeler yapılacak
              
@@ -287,10 +287,27 @@
                          from #....
                          from django.conf import settings
                          from django.conf.urls.static import static
-                         
+                                              
                          urlpatterns = [
-                         #.....  path('contact/',TemplateView.as_view(template_name = 'contact.html')),
+                             #.....  path('contact/',TemplateView.as_view(template_name = 'contact.html')),
                          ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
                          ```
-             
-                         
+    
+12. #### Model öğelerinin sıralanması (order)
+
+       1. models.py dosyasında model class'ı altına
+
+             1. ```
+                   
+                   ```
+
+                   
+
+       
+
+       
+
+
+
+
+​                         

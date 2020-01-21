@@ -20,5 +20,8 @@ class Post(models.Model):
     # modele admin panelinden image ekleme secenegi ve default directory belirlemek
     image = models.ImageField(upload_to='images/', null=True)
 
+    class Meta:
+        ordering = ['-date']
+
     def __str__(self):
         return self.title
