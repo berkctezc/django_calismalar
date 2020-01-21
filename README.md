@@ -297,11 +297,26 @@
 
        1. models.py dosyasında model class'ı altına
 
-             1. ```
-                   
+             1. ```python
+                   class Meta:
+                   	ordering = ['-date']
                    ```
 
-                   
+13. #### Pagination
+
+       1. views class'ına pagination import edilir
+
+             1. ```python
+                   from django.core.paginator import Paginator
+                   ```
+
+       2. ListView class'ı içine sayfa başı kaç öğe gözükmesi isteniyorsa
+
+             1. ```
+                   paginate_by = 2
+                   ```
+
+       3. HTML dökümanında bütün senaryolara göre gerekli durumlar yazılır
 
        
 

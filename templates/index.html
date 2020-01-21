@@ -1,10 +1,7 @@
 {% extends 'base.html' %} {% block content %} {% load static %}
 
 <!-- Page Header -->
-<header
-  class="masthead"
-  style="background-image: url( {% static 'img/home-bg.jpg' %})"
->
+<header class="masthead" style="background-image: url( {% static 'img/home-bg.jpg' %})">
   <div class="overlay"></div>
   <div class="container">
     <div class="row">
@@ -45,7 +42,30 @@
 
       <!-- Pager -->
       <div class="clearfix">
-        <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
+
+        {% if is_paginated %}
+
+          {% if page_obj.number == 1 %} <!-- ilk sayfa mı -->
+            <a href="?page=2" class="btn btn-outline-info float-right">&rsaquo;</a>
+          {% endif %}
+
+          {% if page_obj.has_previous %}  <!-- öncesinde bir sayfa var mı -->
+            <a class="btn btn-outline-info" href="/">&laquo;</a>
+            <a href="?page={{page_obj.previous_page_number}}" class="btn btn-outline-info float-left">&lsaquo;</a>
+          {% endif %}
+
+          {% for num in page_obj.paginator.page_range %} <!--sayfa sayısı kadar for dongusune girilir-->
+            {% if page_obj.number == num and page_obj.number != 1 %}
+              <a href="?page={{num}}" class="btn btn-outline-info " style="margin-left: 20px; margin-right: 20px;" >&lsaquo;{{num}}&rsaquo;</a>
+            {% endif %}
+          {% endfor %}
+
+          {% if page_obj.has_next and page_obj.number != 1 %} <!-- sonrasında bir sayfa var mı ve ilk sayfa degil mi -->
+            <a href="?page={{page_obj.next_page_number}}" class="btn btn-outline-info float-right">&rsaquo;</a>
+            <a href="?page={{page_obj.paginator.num_pages}}" class="btn btn-outline-info float-right">&raquo;</a>
+          {% endif %}
+
+        {% endif  %}
       </div>
     </div>
   </div>
