@@ -275,7 +275,7 @@
                    1. ```bash
                           python manage.py makemigrations
                           python manage.py migrate
-                         ```
+                      ```
              
              4. Admin Panelinden varolan bir posta image eklenir.
              
@@ -312,15 +312,35 @@
 
        2. ListView class'ı içine sayfa başı kaç öğe gözükmesi isteniyorsa
 
-             1. ```
+             1. ```python
                    paginate_by = 2
                    ```
 
        3. HTML dökümanında bütün senaryolara göre gerekli durumlar yazılır
 
-       
+   14. #### Contact Form (Modal Form Yapısı)
 
-       
+          1. contact isminde bir app olusturalım
+
+                1. ```bash
+                   python manage.py startapp contact
+                   ```
+
+             2. sonrasında ana projede settings.py'a blog uygulamasını ekledigimiz sekilde ekleyelim
+
+             3. urls icinde yönlendirme islemini yapalım
+
+             4. models.py icinde model olusturalım
+
+             5. admin paneline register etmek icin admin.py'a gerekli düzenlemeleri yapalım
+
+             6. views dosyamızda gerekli fonksiyonlar yazılır
+
+             7. migrate edilir
+
+          
+
+          
 
 
 

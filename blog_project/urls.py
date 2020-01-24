@@ -25,5 +25,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('blog.urls') ), #blog uygulamamızdaki urls dosyasina bakilacak
     path('about/',TemplateView.as_view(template_name = 'about.html')),
-    path('contact/',TemplateView.as_view(template_name = 'contact.html')),
+    path('contact/',include('contact.urls')),
+    #template hali
+    #path('contact/',TemplateView.as_view(template_name = 'contact.html')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
