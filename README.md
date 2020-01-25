@@ -338,7 +338,29 @@
 
              7. migrate edilir
 
-          
+15. Form Customization  & Widget Yapısı
+
+       1. Widgetlarda özelleştirmeler yapmamızı kolaylaştıran pip paketini yükleyelim
+
+             1. ```bash
+                   pip install django-widget-tweaks
+                   ```
+
+       2. settings.py INSTALLED APPS'a ekleyelim
+
+             1. ```python
+                   INSTALLED_APPS = [ #...
+                   'widget_tweaks',
+                   ]
+                   ```
+
+       3. widget'ı kullanacağımız sayfaya import edelim
+
+             1. ```django
+                   {% load widget_tweaks %}
+                   ```
+
+                   
 
           
 
