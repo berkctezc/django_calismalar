@@ -1,4 +1,5 @@
 from django.db import models
+from ckeditor.fields import RichTextField
 
 # modellerimizi buradan yaratiyoruz
 # blog yazilarimiz icin model olusturalim
@@ -9,7 +10,9 @@ class Post(models.Model):
     title = models.CharField(max_length=100)
     # alt metini 100 karakterle sınırladık
     subtitle = models.CharField(max_length=100)
-    content = models.TextField()  # iceriklerimiz yazi alanı kullanacak
+    content = RichTextField()
+
+    #content = models.TextField()  # iceriklerimiz yazi alanı kullanacak (eski yapi)
     author = models.ForeignKey(  # coktan tekile ilişki ( bir kullanıcı bir çok içerik üretebilir)
         'auth.User',  # django tarafından oluşturulmuş kullanıcı bilgisi
         on_delete=models.CASCADE,  # olusturan kullanıcı silme islemi gerceklestirebilir

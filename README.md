@@ -338,7 +338,7 @@
 
              7. migrate edilir
 
-15. Form Customization  & Widget Yapısı
+15. #### Form Customization  & Widget Yapısı
 
        1. Widgetlarda özelleştirmeler yapmamızı kolaylaştıran pip paketini yükleyelim
 
@@ -360,9 +360,37 @@
                    {% load widget_tweaks %}
                    ```
 
-                   
+       4.    Gerekli düzenlemeler html dosyasında yapıldı
 
-          
+16. #### CK Editor Entegrasyonu
+
+       1. pip üzerinden edilenelim
+
+          	```bash
+              pip install django-ckeditor
+             ```
+
+       2.  settings.py installed apps'e yerleştirelim
+    
+       3. models.py icine gerekli güncellemeyi yapalım
+    
+                1. ```
+                      content = RichTextField()
+                      ```
+    
+       4. Migrationları yapalım
+    
+       5. Artık Admin alanımızda zengin biçimlendirmeli bir content düzenleme alanına sahibiz
+    
+       6. HTML dosyasında ise içerigin bulundugu kısıma safe eklemesi yapılır
+    
+                1. ```django
+                      {{ post.content | safe }}
+                      ```
+    
+       7. Artık admin panelinden html biçimlendirmeli yazdığımız yazıları sitemizde görüntüleyebiliriz
+    
+             
 
 
 
